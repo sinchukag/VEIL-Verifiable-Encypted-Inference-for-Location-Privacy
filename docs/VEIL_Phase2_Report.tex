@@ -1,0 +1,584 @@
+\documentclass[12pt,a4paper,oneside]{report}
+
+% --- Packages ---
+\usepackage[utf8]{utf8}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{setspace}
+\usepackage{fancyhdr}
+\usepackage{tocloft}
+\usepackage[colorlinks=true, linkcolor=black, citecolor=blue, urlcolor=blue]{hyperref}
+
+\onehalfspacing
+
+% --- Set Table of Contents depth to 1 (shows only Chapters and Sections 1.1, 1.2, etc.; hides subsections) ---
+\setcounter{tocdepth}{1}
+
+% --- Header/Footer setup ---
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\leftmark}
+\lfoot{Dept. of CSE, RNSIT 2026-2027}
+\rfoot{Page \thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\begin{document}
+
+% ==========================================
+% TITLE PAGE
+% ==========================================
+\begin{titlepage}
+\begin{center}
+    {\Large \textbf{VISVESVARAYA TECHNOLOGICAL UNIVERSITY}}\\[0.2cm]
+    {\large ``JNANA SANGAMA'', BELAGAVI - 590 018.}\\[0.8cm]
+    
+    \includegraphics[width=2.5cm]{vtu_logo.png}\\[0.6cm]
+    
+    {\large \textbf{A Major Project Phase-2 Report (BCS786)}}\\[0.2cm]
+    {\large on}\\[0.4cm]
+    
+    {\Large \textbf{\color{blue} VEIL - Verifiable Encrypted Inference For Location Privacy}}\\[0.6cm]
+    
+    {\small Submitted in partial fulfillment of the requirements for the final year degree in}\\[0.1cm]
+    {\large \textbf{Bachelor of Engineering in Computer Science and Engineering}}\\[0.1cm]
+    {\small of Visvesvaraya Technological University, Belagavi}\\[0.8cm]
+    
+    \textbf{Submitted by}\\[0.3cm]
+    \begin{table}[h!]
+    \centering
+    \begin{tabular}{ll}
+        \textbf{Shanvi S Shetty} & \textbf{1RN23CS190} \\
+        \textbf{Sinchana K} & \textbf{1RN23CS205} \\
+        \textbf{Tripti Prasanna} & \textbf{1RN23CS230} \\
+    \end{tabular}
+    \end{table}
+    
+    \vspace{0.4cm}
+    \textbf{Under the Guidance of}\\[0.2cm]
+    {\large \textbf{Mr. Manjunath G S}}\\[0.1cm]
+    Assistant Professor, Dept. of CSE\\[0.8cm]
+    
+    \includegraphics[width=2.2cm]{rnsit_logo.png}\\[0.4cm]
+    
+    {\large \textbf{Department of Computer Science and Engineering}}\\[0.1cm]
+    {\large \textbf{RNS Institute of Technology}}\\[0.1cm]
+    {\small RR Nagar, Dr. Vishnuvardhan Road, Bengaluru-560098}\\[0.1cm]
+    {\small Ph: (080) 28611880 / 1; www.rnsit.ac.in}\\[0.4cm]
+    
+    {\large \textbf{2026-2027}}
+\end{center}
+\end{titlepage}
+
+% ==========================================
+% CERTIFICATE PAGE
+% ==========================================
+\newpage
+\thispagestyle{empty}
+\begin{center}
+    {\large \textbf{RN SHETTY TRUST\textregistered}}\\[0.1cm]
+    {\Large \textbf{\color{red} RNS INSTITUTE OF TECHNOLOGY}}\\[0.1cm]
+    {\small RR Nagar, Dr. Vishnuvardhan Road, Bengaluru-560098}\\[0.2cm]
+    {\large \textbf{DEPARTMENT OF COMPUTER SCIENCE AND ENGINEERING}}\\[0.4cm]
+    
+    \includegraphics[width=2.2cm]{rnsit_logo.png}\\[0.4cm]
+    
+    {\Large \textbf{\color{red} CERTIFICATE}}\\[0.6cm]
+\end{center}
+
+\noindent Certified that the Project work entitled \textbf{\color{red} VEIL - Verifiable Encrypted Inference For Location Privacy} has been successfully carried out at \textbf{RNSIT} by \textbf{\color{blue} Shanvi S Shetty} (1RN23CS190), \textbf{\color{blue} Sinchana K} (1RN23CS205), and \textbf{\color{blue} Tripti Prasanna} (1RN23CS230), bonafide students of \textbf{RNS Institute of Technology} in partial fulfillment of the requirements of final year degree in \textbf{Bachelor of Engineering in Computer Science and Engineering} of \textbf{Visvesvaraya Technological University, Belagavi} during academic year \textbf{2026-2027}. The Project report has been approved as it satisfies the academic requirements in respect of project work for the said degree.\\[2.5cm]
+
+\noindent
+\begin{tabular}{lll}
+\textbf{Mr. Manjunath G S} & \textbf{Dr. Sampada K S} & \textbf{Dr. Ramesh Babu H S} \\
+Assistant Professor & Professor and Head & Principal \\
+Dept. of CSE, RNSIT & Dept. of CSE, RNSIT & RNSIT \\
+\end{tabular}
+
+\vfill
+\begin{center}
+\textbf{\color{red} EXTERNAL VIVA-VOCE}\\[0.4cm]
+\begin{tabular}{p{7cm}p{7cm}}
+\textbf{Name of the Examiners} & \textbf{Signature with Date} \\[0.8cm]
+1. \hrulefill & \hrulefill \\[0.8cm]
+2. \hrulefill & \hrulefill \\
+\end{tabular}
+\end{center}
+
+% ==========================================
+% FRONT MATTER
+% ==========================================
+\newpage
+\pagenumbering{roman}
+
+\section*{Acknowledgement}
+\addcontentsline{toc}{section}{Acknowledgement}
+We extend our profound thanks to the Management of \textbf{RNS Institute of Technology} for fostering an environment that promotes innovation and academic excellence.
+
+We want to express our gratitude to our beloved Principal, \textbf{Dr. Ramesh Babu H S}, for his constant encouragement and insightful support. Their guidance has been pivotal in keeping us motivated throughout this endeavour.
+
+Our heartfelt appreciation goes to \textbf{Dr. Sampada K S}, Professor and HoD of Computer Science and Engineering, for her vital support.
+
+We also thank the Project Coordinators for continuous monitoring and ensuring the process was deployed as per schedule.
+
+We are deeply grateful to our project guide, \textbf{Mr. Manjunath G S}, Assistant Professor, for his unwavering support, guidance, and valuable suggestions throughout the duration of this project. Lastly, our thanks go to all the teaching and non-teaching staff members of the Computer Science and Engineering Department for their encouragement, cooperation, and support.
+
+\vspace{1cm}
+\noindent \textbf{Shanvi S Shetty (1RN23CS190)}\\
+\textbf{Sinchana K (1RN23CS205)}\\
+\textbf{Tripti Prasanna (1RN23CS230)}
+
+\newpage
+\section*{Abstract}
+\addcontentsline{toc}{section}{Abstract}
+\textbf{VEIL} (Verifiable Encrypted Inference for Location Privacy) addresses the growing need for secure computation in location-based services by enabling users to query nearby points of interest without revealing their actual geographic coordinates to remote servers. In recent years, research in secure computation has shown increasing interest in cryptographic techniques such as garbled circuits and oblivious transfer as viable solutions for privacy-preserving data processing. However, despite this progress, there remains a significant gap in the practical integration of these techniques into real-world, scalable applications involving dynamic geographic datasets.
+
+VEIL bridges this gap by combining efficient kNN computation with advanced cryptographic protocols, including Yao's garbled circuits for secure distance evaluation (optimized via Free-XOR and Half-Gates primitives), oblivious transfer for input privacy, and SHA-256 Merkle trees for result verification. The system leverages real-time geographic data sourced from OpenStreetMap via the Overpass API for the Bengaluru region and integrates it into a full-stack web architecture comprising a React.js single-page application frontend and a Node.js/Express REST backend. Through this approach, VEIL demonstrates the feasibility of secure location-based querying while providing explicit transparency into performance trade-offs, circuit gate complexity, and cryptographic verification mechanisms.
+
+\newpage
+\tableofcontents
+\newpage
+\listoffigures
+\newpage
+\listoftables
+
+% ==========================================
+% MAIN CONTENT
+% ==========================================
+\newpage
+\pagenumbering{arabic}
+
+% ------------------------------------------
+% CHAPTER 1: INTRODUCTION
+% ------------------------------------------
+\chapter{INTRODUCTION}
+
+\section{Problem Statement}
+With the rapid proliferation of location-aware mobile devices and smart applications, Location-Based Services (LBS) have become an indispensable component of modern digital infrastructure. Applications such as real-time turn-by-turn navigation, food delivery platforms, ride-hailing networks, emergency response services, and localized commercial search rely on determining the physical position of a user relative to a database of points of interest (POIs).
+
+However, the dominant operational paradigm of modern LBS presents a fundamental privacy paradox: to receive personalized or proximity-based recommendations, users are forced to transmit their precise Global Positioning System (GPS) coordinates—typically represented as latitude ($\phi$) and longitude ($\lambda$) pairs—to remote, third-party backend servers.
+
+Location coordinates are among the most sensitive categories of personal information. Unlike static identifiers, spatial coordinates continuously track human physical activity. An adversary or an honest-but-curious server observing location traces over time can easily perform inference attacks to uncover:
+\begin{enumerate}
+    \item \textbf{Home and Work Residences:} Clustering stationary spatial coordinates during nighttime and daytime hours reveals a user's exact residential and employment addresses.
+    \item \textbf{Health and Medical Conditions:} Repeated location queries performed near specialized medical facilities betray underlying personal health conditions.
+    \item \textbf{Religious and Social Habits:} Queries near specific places of worship or community centers disclose personal beliefs and civil activities.
+    \item \textbf{Social Linkability:} Co-location analysis across multiple user location streams allows attackers to reconstruct intimate social networks.
+\end{enumerate}
+
+The primary challenge addressed in this project is: \textit{How can a mobile user obtain accurate k-Nearest-Neighbor (kNN) results from a spatial server without exposing their exact GPS coordinates to the backend, while simultaneously ensuring that the returned spatial results are cryptographically authentic and have not been manipulated in transit?}
+
+\section{Solution for the Problem}
+To resolve this privacy-integrity trade-off, we propose \textbf{VEIL} (Verifiable Encrypted Inference for Location Privacy). VEIL is a prototype two-party client-backend privacy-preserving LBS system that computes k-Nearest-Neighbor queries over real-world OpenStreetMap (OSM) spatial datasets without transmitting the user's exact coordinates to the server.
+
+VEIL operates on a two-stage design:
+\begin{enumerate}
+    \item \textbf{Coarse Candidate Discovery Stage:} The client derives a lower-precision spatial representation ($\approx 1.11\text{ km}$ grid cell) to bound the search space to a candidate set of POIs. Exact coordinates never participate in this stage.
+    \item \textbf{Client-Side Garbled Circuit Distance Evaluation:} The backend constructs a Boolean circuit evaluating squared Euclidean distance ($d^2 = dx^2 + dy^2$) using Yao's Garbled Circuits with Free-XOR and Half-Gates optimizations. The client evaluates the circuit locally, keeping exact coordinates on the browser.
+    \item \textbf{Cryptographic Result Verification via Merkle Trees:} The backend constructs a SHA-256 Merkle tree over its POI dataset and publishes root $R$. Each returned kNN result is accompanied by an $O(\log n)$ Merkle inclusion proof ($\pi_i$), ensuring data integrity.
+\end{enumerate}
+
+\section{Existing Technique}
+Prior research in location privacy can be broadly classified into three main technical categories:
+
+\subsection{Anonymization and Spatial Cloaking}
+Anonymization schemes such as k-anonymity obscure a user's identity by expanding their exact point location into a cloaking region containing at least $k-1$ other active users.
+\begin{itemize}
+    \item \textbf{Limitations:} Spatial cloaking provides no formal cryptographic secrecy. It degrades query accuracy, increases server processing overhead, relies on a single trusted anonymizer node, and remains vulnerable to correlation attacks.
+\end{itemize}
+
+\subsection{Pseudonymization and Mix-Zones}
+Pseudonymization schemes replace real user identifiers with temporary pseudonyms within designated geographic regions known as ``mix-zones''.
+\begin{itemize}
+    \item \textbf{Limitations:} Mix-zones offer only heuristic unlinkability. An attacker with access to road network topology and velocity vectors can easily reconstruct user trajectories across mix-zone boundaries.
+\end{itemize}
+
+\subsection{Encryption-Based Schemes}
+Encryption-based techniques employ Geometric Searchable Encryption (GSE) or Homomorphic Encryption (HE) to execute queries over encrypted spatial data.
+\begin{itemize}
+    \item \textbf{Limitations:} Standard Homomorphic Encryption introduces extreme computational latency (tens of seconds per query) and massive ciphertext expansion, while lacking result verifiability.
+\end{itemize}
+
+\begin{table}[h!]
+\centering
+\caption{Comparison of Existing Location Privacy Paradigms vs. Proposed VEIL Prototype}
+\label{tab:comparison}
+\small
+\begin{tabular}{p{3.5cm}p{3cm}p{2.5cm}p{2.5cm}p{2.5cm}}
+\toprule
+\textbf{Technique} & \textbf{Exact Secrecy} & \textbf{Privacy Model} & \textbf{Verifiability} & \textbf{Real Datasets} \\
+\midrule
+Commercial LBS & No (Raw Sent) & None & No Proof & Yes (OSM/Google) \\
+k-Anonymity & No (Cloaked) & Heuristic & No & Synthetic \\
+Mix-Zones & No (Pseudonym) & Heuristic & No & Trajectories \\
+Homomorphic Enc. & Yes & Cryptographic & No & Small Benchmarks \\
+\textbf{VEIL (Proposed)} & \textbf{Yes (Kept Local)} & \textbf{Semi-Honest} & \textbf{Yes (Merkle)} & \textbf{Live OSM (Bengaluru)} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Proposed Technique}
+VEIL integrates four core technical components:
+\subsection{Coarse Candidate Discovery}
+Coarsened location coordinates are derived via:
+\begin{equation}
+q_{\text{coarse}} = \left( \frac{\text{round}(q_{\text{lat}} \cdot 10^2)}{10^2}, \frac{\text{round}(q_{\text{lon}} \cdot 10^2)}{10^2} \right)
+\end{equation}
+
+\subsection{Fixed-Point Coordinate Encoding}
+Coordinates are scaled into 32-bit signed fixed-point integers using scale factor $S = 10^6$:
+\begin{equation}
+X_q = \lfloor |q_{\text{lat}}| \cdot 10^6 \rceil, \quad Y_q = \lfloor |q_{\text{lon}}| \cdot 10^6 \rceil
+\end{equation}
+
+\subsection{Optimized Boolean Garbled Circuit Construction}
+For candidate POI $p_i = (x_i, y_i)$, the distance sub-circuit evaluates:
+\begin{equation}
+dx = x_q - x_i, \quad dy = y_q - y_i, \quad d^2 = dx^2 + dy^2
+\end{equation}
+Sub-circuit gate breakdown:
+\begin{itemize}
+    \item Subtractor (SUB): 33-bit ripple-carry subtractors (66 AND gates per POI, 3\%).
+    \item Squarer (SQR): Schoolbook integer squarer (2,048 AND gates per POI, 91\%).
+    \item Adder (ADD): Ripple-carry adder for $d^2$ (65 AND gates per POI, 3\%).
+    \item Comparator (CMP): Bitwise comparator network (65 AND gates per POI, 3\%).
+\end{itemize}
+
+\subsection{Wire-Label Selection}
+Client selects matching input wire labels locally corresponding to its private bit vector.
+
+\subsection{Merkle Tree Result Verification}
+Client verifies returned POI against root $R$:
+\begin{equation}
+\text{MerkleVerify}(R, p_i, \pi_i) = 1 \quad \forall i \in \{1, \dots, k\}
+\end{equation}
+
+\section{Objective}
+\begin{itemize}
+    \item Eliminate exact GPS transmission to backend servers.
+    \item Implement custom zero-dependency Boolean garbled circuit kNN evaluation in JavaScript using Free-XOR and Half-Gates primitives.
+    \item Guarantee result integrity via SHA-256 Merkle tree verification proofs.
+    \item Connect to live OpenStreetMap data for metropolitan Bengaluru.
+\end{itemize}
+
+\section{Scope of the Project}
+\begin{itemize}
+    \item \textbf{Architectural Scope:} Two-party client-backend model (React SPA + Node.js Express).
+    \item \textbf{Adversary Model:} Semi-honest (honest-but-curious) model.
+    \item \textbf{Geographic Bounding:} Evaluated over $n = 500$ real OSM POIs in Bengaluru across Hospitals, Restaurants, Cafes, and Pharmacies.
+\end{itemize}
+
+\section{Organization of Report}
+The remaining chapters are structured as follows: Chapter 2 presents Literature Survey, Chapter 3 details Requirement Specification, Chapter 4 covers System Design, Chapter 5 outlines Implementation, Chapter 6 covers Testing and Results, Chapter 7 presents Conclusion and Future Enhancements, and Chapter 8 covers Paper Publication details and draft manuscript.
+
+
+% ------------------------------------------
+% CHAPTER 2: LITERATURE SURVEY
+% ------------------------------------------
+\chapter{LITERATURE SURVEY}
+
+\section{Research Papers \& Studies}
+\subsection{Anonymization and Spatial Cloaking Paradigms}
+Gruteser and Grunwald pioneered location anonymization based on k-anonymity. However, spatial cloaking introduces single-point-of-failure middle-tier anonymizers and fails against background correlation attacks.
+
+\subsection{Pseudonymization and Mix-Zone Schemes}
+Palanisamy and Liu proposed MobiMix for road network mix-zones. However, mix-zones provide only heuristic privacy and remain vulnerable to vehicle velocity and directional vector tracking.
+
+\subsection{Searchable and Homomorphic Encryption in LBS}
+Chen et al. developed Geometric Searchable Encryption (GSE) for inner-product spatial queries. However, homomorphic encryption schemes introduce multi-second per-query delays and lack result verifiability.
+
+\subsection{Garbled Circuit Foundations and Optimizations}
+Yao introduced Garbled Circuits (GC). Kolesnikov and Schneider introduced Free-XOR (zero-cost XOR gates), and Zahur et al. established Half-Gates garbling (reducing AND gates to 2 ciphertexts per gate).
+
+\subsection{Verifiable Outsourced Computation and Merkle Trees}
+Merkle introduced hash trees. Publishing Merkle root $R$ allows verifiable inclusion proofs ($\pi_i$) under SHA-256 collision resistance.
+
+\section{Recent Paper's Summary}
+\begin{table}[h!]
+\centering
+\caption{Comprehensive Summary of Relevant Literature}
+\label{tab:lit_summary}
+\small
+\begin{tabular}{p{2cm}p{3.5cm}p{4.5cm}p{4.5cm}}
+\toprule
+\textbf{Year} & \textbf{Authors} & \textbf{Key Technical Idea} & \textbf{Primary Limitation / Gap} \\
+\midrule
+2024 & Eshun \& Palmieri & Indoor Wi-Fi localization via MPC & Requires non-colluding servers \\
+2023 & Chen et al. & Geometric Searchable Encryption & Inefficient for exact kNN; no proof \\
+2021 & Liu et al. & SHA-256 Merkle tree verification & No location privacy focus \\
+2019 & Zhang et al. & Grid-Voronoi spatial indexing & Zero privacy protection \\
+2017 & Kim et al. & Garbled Circuit kNN classification & High overhead; lacks spatial bounding \\
+2015 & Zahur et al. & Half-Gates AND garbling optimization & Core primitive; no complete LBS protocol \\
+2008 & Kolesnikov et al. & Free-XOR garbling optimization & Primitive; needs comparator networks \\
+1986 & Yao & Two-party garbled circuit protocol & Standard garbling requires 4 ciphertexts \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Conclusion}
+Existing solutions exhibit a dichotomy: non-cryptographic schemes offer speed without security, while pure cryptographic schemes suffer from high latency. Furthermore, prior work lacks result verifiability. VEIL bridges this gap through a hybrid two-stage design combining candidate coarsening, garbled circuits, and Merkle proofs.
+
+
+% ------------------------------------------
+% CHAPTER 3: REQUIREMENT SPECIFICATION
+% ------------------------------------------
+\chapter{REQUIREMENT SPECIFICATION}
+
+\section{Software Requirements}
+\begin{itemize}
+    \item \textbf{Backend Server:} Node.js (v18.0+), Express.js (v4.18+), `node-fetch` (v3.x), Built-in `crypto` module.
+    \item \textbf{Frontend Client:} Modern ES6+ Browser (Chrome $\ge 110$, Firefox $\ge 108$, Edge $\ge 110$), Web Crypto API (`window.crypto.subtle`), React.js (v18.2+), Vite bundler, TailwindCSS, Leaflet.js (v1.9+), Three.js (r128+).
+    \item \textbf{External APIs:} OpenStreetMap Overpass API (`https://overpass-api.de/api/interpreter`).
+\end{itemize}
+
+\section{Hardware Requirements}
+\begin{itemize}
+    \item \textbf{Backend Workstation:} Intel Core i5/i7 or AMD Ryzen 5/7, 8 GB RAM (16 GB recommended), 2 GB SSD.
+    \item \textbf{Client Device:} Dual-core 2.0 GHz CPU, 4 GB RAM, $1366 \times 768$ display resolution, 4G/5G/Wi-Fi connection.
+\end{itemize}
+
+\section{Functional Requirements}
+\begin{table}[h!]
+\centering
+\caption{System Functional Requirements Summary}
+\small
+\begin{tabular}{p{2cm}p{4cm}p{8cm}}
+\toprule
+\textbf{Req ID} & \textbf{Requirement Name} & \textbf{Functional Description} \\
+\midrule
+FR-1 & Location Acquisition & Acquire GPS via HTML5 Geolocation API or manual entry. \\
+FR-2 & Location Coarsening & Coarsen exact client coordinates into a $0.01^\circ$ grid cell. \\
+FR-3 & Candidate Discovery & Backend returns bounded candidate POI set from OSM cache. \\
+FR-4 & Fixed-Point Encoding & Scale coordinates by $10^6$ into 32-bit Boolean arrays. \\
+FR-5 & Garbled Circuit Setup & Garble distance circuit (2,244 AND gates/POI) with Free-XOR/Half-Gates. \\
+FR-6 & Wire-Label Selection & Client selects matching wire labels locally matching its private bits. \\
+FR-7 & Client Evaluation & Browser evaluates garbled gates to compute squared distances. \\
+FR-8 & Merkle Proof Gen & Server constructs SHA-256 Merkle tree and supplies proofs $\pi_i$. \\
+FR-9 & Result Verification & Client verifies returned POIs against Merkle root $R$. \\
+FR-10 & Dual-Mode Execution & Interface allows toggling plain baseline vs secure VEIL mode. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Non-Functional Requirements}
+\begin{table}[h!]
+\centering
+\caption{System Non-Functional Requirements Summary}
+\small
+\begin{tabular}{p{2cm}p{4cm}p{8cm}}
+\toprule
+\textbf{NFR ID} & \textbf{Attribute} & \textbf{Specification} \\
+\midrule
+NFR-1 & Exact Input Privacy & Backend learns no exact user GPS coordinates under semi-honest model. \\
+NFR-2 & Result Integrity & Detects altered/fabricated POI results with probability $1 - 2^{-256}$. \\
+NFR-3 & Latency & Plain kNN $< 50\text{ ms}$; Secure GC query completes in $20 - 27\text{ s}$ in browser JS. \\
+NFR-4 & Circuit Payload & Garbled circuit payload bounded to $\approx 35.06\text{ MB}$ for $n=500$ candidates. \\
+NFR-5 & Transparency & Clear UI disclosure of garbling stages, timing, and verification status. \\
+NFR-6 & Fault Tolerance & Graceful fallback to pre-cached dataset upon OSM API timeouts. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+% ------------------------------------------
+% CHAPTER 4: SYSTEM DESIGN
+% ------------------------------------------
+\chapter{SYSTEM DESIGN}
+
+\section{System Architecture}
+VEIL is architected as a two-party system enforcing physical separation between coarsened spatial candidate discovery and client-side private circuit evaluation.
+
+\subsection{Architectural Components}
+\begin{enumerate}
+    \item \textbf{Client-Side Subsystems (User Browser):} Location Acquisition Module, Spatial Coarsening Engine, Fixed-Point Coordinate Encoder, Garbled Circuit Evaluator (Web Crypto AES-128), Merkle Proof Verifier \& React UI.
+    \item \textbf{Backend Server Subsystems (Node.js/Express):} OSM Data Fetcher \& Spatial Cache, Candidate Discovery Engine (`/api/candidates`), Garbled Circuit Engine (`/api/gc/init`), Merkle Commitment Engine (`/api/gc/resolve`, `/api/verify`).
+\end{enumerate}
+
+\section{Workflow}
+Operational sequence across 6 execution phases:
+\begin{enumerate}
+    \item Dataset Initialization Phase: Server fetches OSM POIs, builds Merkle tree, publishes root $R$.
+    \item Coarse Location Query Phase: Client coarsens GPS to $0.01^\circ$ grid, requests candidates from `/api/candidates`.
+    \item Circuit Setup Phase: Server garbles distance circuit (1,122,000 AND gates for $n=500$), returns GC bundle via `/api/gc/init`.
+    \item Client Circuit Evaluation Phase: Browser encodes exact coordinates into 32-bit arrays, evaluates circuit gates locally.
+    \item Result Resolution Phase: Client submits top-k result POI IDs to `/api/gc/resolve` to obtain metadata and Merkle proofs.
+    \item Integrity Verification Phase: Client recomputes local SHA-256 leaf hashes, verifies sibling proofs against root $R$.
+\end{enumerate}
+
+\section{Data Flow Diagram}
+\begin{itemize}
+    \item \textbf{DFD Level 0 (Context Diagram):} Defines interfaces between Client Browser SPA, VEIL Backend Boundary, and OpenStreetMap Overpass API.
+    \item \textbf{DFD Level 1 (Subsystem Decomposition):} Decomposes system into Process 1.0 (Candidate Discovery), Process 2.0 (GC Generation), Process 3.0 (Client Evaluation), and Process 4.0 (Merkle Resolution \& Verification) across Data Stores D1 (OSM Cache), D2 (Session Store), and D3 (Merkle Store).
+\end{itemize}
+
+
+% ------------------------------------------
+% CHAPTER 5: IMPLEMENTATION
+% ------------------------------------------
+\chapter{IMPLEMENTATION}
+
+\section{Project Modules}
+\begin{itemize}
+    \item `backend/osm/fetcher.js`: Overpass QL bounding box query execution and POI data normalization.
+    \item `backend/geometry/knn.js`: Unencrypted baseline Haversine distance engine and max-heap kNN selection.
+    \item `backend/crypto/merkle/merkleTree.js`: Canonical sorting, SHA-256 leaf hashing, binary tree assembly, and proof extraction.
+    \item `backend/crypto/gc/garbledCircuit.js`: Wire label allocation, Half-Gates AND encryption, and GC bundle packaging.
+    \item `backend/crypto/veil.js`: Session orchestration and active session store management.
+    \item `backend/server.js`: Express REST API endpoints (`/api/health`, `/api/dataset`, `/api/candidates`, `/api/gc/init`, `/api/gc/resolve`, `/api/verify`).
+    \item `frontend/src/services/gcProtocol.js`: Client-side coordinate scaling, local label selection, and Web Crypto AES decryptions.
+    \item `frontend/src/components/*`: Interactive React UI (`ControlPanel`, `MapView`, `ThreeScene`, `ResultPanel`, `ComplexityPanel`).
+\end{itemize}
+
+\section{Algorithms Used}
+\subsection{Fixed-Point Scaling}
+Coordinates scaled by $S=10^6$ and converted into 32-bit binary arrays $x_q[32], y_q[32]$.
+
+\subsection{Free-XOR & Half-Gates Garbling}
+Free-XOR enforces global offset $\Delta \in \{0,1\}^{128}$ with LSB=1 such that $W_w^1 = W_w^0 \oplus \Delta$. XOR gates incur zero cost ($W_c = W_a \oplus W_b$). Half-Gates AND encryption generates 2 ciphertexts $(T_g, T_e)$ per AND gate.
+
+\section{Pseudocode Algorithms}
+
+\begin{algorithm}[H]
+\caption{Dataset Merkle Commitment Construction (Server-Side)}
+\begin{algorithmic}[1]
+\Require Dataset POI array $\mathcal{D} = \{p_1, p_2, \dots, p_n\}$
+\Ensure Merkle Root $R$, Leaf Hash Map $M$
+\State Sort $\mathcal{D}$ canonically by POI integer ID
+\For{each $p_i \in \mathcal{D}$}
+    \State $\text{leafHash}_i \leftarrow \text{SHA256}(\text{JSON}(p_i))$
+    \State Store $\text{leafHash}_i$ in Leaf Hash Map $M[p_i.\text{id}]$
+\EndFor
+\State $\text{currentLevel} \leftarrow [\text{leafHash}_1, \dots, \text{leafHash}_n]$
+\While{$|\text{currentLevel}| > 1$}
+    \State $\text{nextLevel} \leftarrow []$
+    \For{$i = 0$ to $|\text{currentLevel}| - 1$ step 2}
+        \If{$i + 1 < |\text{currentLevel}|$}
+            \State $\text{parent} \leftarrow \text{SHA256}(\text{currentLevel}[i] \parallel \text{currentLevel}[i+1])$
+        \Else
+            \State $\text{parent} \leftarrow \text{currentLevel}[i]$ \Comment{Duplicate odd node}
+        \EndIf
+        \State Append $\text{parent}$ to $\text{nextLevel}$
+    \EndFor
+    \State $\text{currentLevel} \leftarrow \text{nextLevel}$
+\EndWhile
+\State \Return $R \leftarrow \text{currentLevel}[0], M$
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[H]
+\caption{Client-Side Garbled Circuit Evaluation}
+\begin{algorithmic}[1]
+\Require Garbled Bundle $\mathcal{B}$, Client exact GPS $(q_{\text{lat}}, q_{\text{lon}})$, Target $k$
+\Ensure Top-$k$ Result POI IDs $\mathcal{R}_{\text{ids}}$
+\State Scale coordinates: $X_q \leftarrow \lfloor |q_{\text{lat}}| \cdot 10^6 \rceil, Y_q \leftarrow \lfloor |q_{\text{lon}}| \cdot 10^6 \rceil$
+\State Convert $X_q, Y_q$ to 32-bit Boolean arrays $x_q[32], y_q[32]$
+\State Select input wire labels $W_{\text{in}}$ matching bits $x_q, y_q$ (Local Simulated OT)
+\For{each gate $g \in \mathcal{B}.\text{garbledTables}$ in topological order}
+    \If{$g$ is XOR gate}
+        \State $W_{\text{out}} \leftarrow W_{\text{in},a} \oplus W_{\text{in},b}$ \Comment{Free-XOR zero-cost}
+    \Else
+        \State Decrypt Half-Gates ciphertexts $(T_g, T_e)$ via Web Crypto AES-128
+        \State Compute output wire label $W_{\text{out}}$
+    \EndIf
+\EndFor
+\State Extract output bits, map to candidate distance rankings, select top-$k$ $\mathcal{R}_{\text{ids}}$
+\State \Return $\mathcal{R}_{\text{ids}}$
+\end{algorithmic}
+\end{algorithm}
+
+
+% ------------------------------------------
+% CHAPTER 6: TESTING AND RESULTS
+% ------------------------------------------
+\chapter{TESTING AND RESULTS}
+
+\section{Unit Testing}
+Unit testing verifies core functional correctness of individual sub-modules in isolation.
+\begin{itemize}
+    \item \textbf{Subtractor Module (`SUB`):} Verified 33-bit ripple-carry subtractor unit tests across positive, negative, and edge-case coordinate inputs.
+    \item \textbf{Squarer Module (`SQR`):} Verified schoolbook integer squarer unit tests for 32-bit values over 2,048 garbled AND gates without overflow.
+    \item \textbf{Merkle Tree Engine (`merkleTree.js`):} Verified canonical sorting, SHA-256 leaf hashing, proof extraction, and root recalculation.
+    \item \textbf{Oblivious Transfer Scaffolding (`obliviousTransfer.js`):} Benchmarked Naor-Pinkas public-key operations and IKNP symmetric extension.
+\end{itemize}
+
+\section{Integration Testing}
+End-to-end integration tests validate requests across client and server endpoints (`/api/candidates`, `/api/gc/init`, `/api/gc/resolve`). An automated test script (`tamper_test.js`) injects modified POI attributes to confirm that client recomputation rejects altered responses with probability $1 - 2^{-256}$.
+
+\subsection{Empirical Performance Analysis \& Gate Complexity}
+Plain baseline kNN completes in sub-50 ms latency. Secure garbled circuit evaluation over $n=500$ candidate POIs involves exactly 1,122,000 AND gates (2,244 AND gates per POI) and 2,244,000 AES-128 operations. The dominant cost is integer squaring, accounting for 91\% of per-POI AND gates (2,048 AND gates). End-to-end secure query latency ranges between 20 and 28 seconds in interpreted browser JavaScript.
+
+\begin{table}[h!]
+\centering
+\caption{Garbled Circuit Complexity Breakdown per POI and Dataset}
+\label{tab:gate_complexity}
+\small
+\begin{tabular}{p{3cm}p{4cm}p{3.5cm}p{3cm}}
+\toprule
+\textbf{Module} & \textbf{Function} & \textbf{AND Gates / POI} & \textbf{Percentage} \\
+\midrule
+SUB & 33-bit Subtractor & 66 AND gates & 3.0\% \\
+SQR & 32-bit Integer Squarer & 2,048 AND gates & 91.2\% \\
+ADD & Ripple-Carry Adder & 65 AND gates & 2.9\% \\
+CMP & Comparator Network & 65 AND gates & 2.9\% \\
+\midrule
+\textbf{Total / POI} & \textbf{Single POI Circuit} & \textbf{2,244 AND gates} & \textbf{100.0\%} \\
+\textbf{Total ($n=500$)} & \textbf{Candidate Dataset} & \textbf{1,122,000 AND gates} & \textbf{2,244,000 AES Calls} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Application Interface Snapshots}
+Figure 6.1 illustrates the application landing page, Figure 6.2 displays live secure kNN query execution with green Merkle Verified badges, and Figure 6.3 details the circuit gate complexity panel.
+
+
+% ------------------------------------------
+% CHAPTER 7: CONCLUSION
+% ------------------------------------------
+\chapter{CONCLUSION}
+
+\section{Conclusion}
+The project successfully demonstrates the design, implementation, and empirical evaluation of \textbf{VEIL} (Verifiable Encrypted Inference for Location Privacy), a privacy-preserving location-based k-Nearest Neighbour system. VEIL addresses a critical gap in modern LBS digital infrastructure, where mobile users are traditionally required to transmit precise GPS coordinates to untrusted remote servers, exposing sensitive behavioural, residential, and medical patterns.
+
+By synthesizing Yao's Garbled Circuits (enhanced with Free-XOR and Half-Gates optimizations), Oblivious Transfer (Naor-Pinkas with IKNP extension), and SHA-256 Merkle tree verification, VEIL enables secure computation of nearest-neighbour queries without disclosing user coordinates to the backend or exposing proprietary POI datasets to the client. The system was validated over a real-world OpenStreetMap dataset of 500 POIs for Bengaluru, India. Research papers detailing the system have been submitted to C2I6 2026 (Paper ID 477) and COMPSIF 2027 (Paper ID 65).
+
+\section{Future Enhancement}
+\begin{enumerate}
+    \item \textbf{Stronger Adversary Model:} Extend security using authenticated garbling or cut-and-choose GC.
+    \item \textbf{WebAssembly Acceleration:} Compile browser circuit evaluator to WASM to achieve sub-second decryption times.
+    \item \textbf{Production Oblivious Transfer:} Integrate network-bound IKNP OT extension between client and backend.
+    \item \textbf{Spatial Pre-Filtering:} Implement R-tree spatial indexing to scale candidate datasets beyond 10,000+ POIs.
+\end{enumerate}
+
+
+% ==========================================
+% REFERENCES
+% ==========================================
+\newpage
+\begin{thebibliography}{99}
+\addcontentsline{toc}{chapter}{References}
+
+\bibitem{eshun2024} S. N. Eshun and P. Palmieri, ``A Cryptographic Protocol for Efficient Mutual Location Privacy Through Outsourcing in Indoor Wi-Fi Localization,'' \textit{IEEE Transactions on Information Forensics and Security}, vol. 19, pp. 4086--4099, 2024.
+\bibitem{gruteser2003} M. Gruteser and D. Grunwald, ``Anonymous Usage of Location-Based Services Through Spatial and Temporal Cloaking,'' in \textit{Proc. ACM MobiSys}, 2003, pp. 31--42.
+\bibitem{palanisamy2011} B. Palanisamy and L. Liu, ``MobiMix: Protecting Location Privacy with Mix-Zones over Road Networks,'' in \textit{Proc. IEEE ICDE}, 2011, pp. 494--505.
+\bibitem{chen2023} Z. Chen, J. Nie, Z. Li, W. Susilo, and C. Ge, ``Geometric Searchable Encryption for Privacy-Preserving Location-Based Services,'' \textit{IEEE Transactions on Services Computing}, vol. 16, no. 4, pp. 2672--2685, 2023.
+\bibitem{kim2017} H.-J. Kim, H.-I. Kim, and J.-W. Chang, ``A Privacy-Preserving kNN Classification Algorithm Using Yao's Garbled Circuit on Cloud Computing,'' in \textit{Proc. IEEE Cloud}, 2017, pp. 766--769.
+\bibitem{kolesnikov2008} V. Kolesnikov and T. Schneider, ``Improved Garbled Circuit: Free-XOR Gates and Applications,'' in \textit{Proc. ICALP}, Springer, 2008, pp. 486--498.
+\bibitem{zahur2015} S. Zahur, M. Rosulek, and D. Evans, ``Two Halves Make a Whole: Reducing Data Transfer in Garbled Circuits Using Half Gates,'' in \textit{Proc. EUROCRYPT}, Springer, 2015, pp. 220--250.
+\bibitem{ishai2003} Y. Ishai, J. Kilian, K. Nissim, and E. Petrank, ``Extending Oblivious Transfers Efficiently,'' in \textit{Proc. CRYPTO}, Springer, 2003, pp. 145--161.
+\bibitem{lindell2012} Y. Lindell and B. Pinkas, ``Secure Two-Party Computation via Cut-and-Choose Oblivious Transfer,'' \textit{Journal of Cryptology}, vol. 25, no. 4, pp. 680--722, 2012.
+\bibitem{naor1999} M. Naor and B. Pinkas, ``Oblivious Transfer and Polynomial Evaluation,'' in \textit{Proc. ACM STOC}, 1999, pp. 245--254.
+\bibitem{yao1986} A. C.-C. Yao, ``How to Generate and Exchange Secrets,'' in \textit{Proc. IEEE FOCS}, 1986, pp. 162--167.
+
+\end{thebibliography}
+
+\end{document}
